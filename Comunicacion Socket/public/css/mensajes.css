@@ -1,0 +1,9 @@
+.text_input {
+	font-size: 16px;
+	position: flex;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px 15px;
+	width: 100%;
+}

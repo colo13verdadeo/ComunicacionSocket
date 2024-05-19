@@ -1,0 +1,26 @@
+{
+  "name": "lobosvspueblo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec \" node iniciar.js\"",
+    "testaux": "mocha funciones/**/*.test.js",
+    "test": "nodemon --exec \"npm run testaux\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^5.0.0",
+    "ejs": "^3.1.9",
+    "expect": "^29.7.0",
+    "express": "^4.18.2",
+    "express-mysql-session": "^3.0.0",
+    "express-session": "^1.17.3",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.2",
+    "path": "^0.12.7",
+    "socket.io": "^4.7.2"
+  }
+}

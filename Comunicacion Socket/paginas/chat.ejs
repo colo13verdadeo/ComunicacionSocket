@@ -1,0 +1,71 @@
+<script type="module">
+    var nombre = '<%- empresa %>';
+    var idusu = '<%- idusu %>';
+    import { io } from "https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.esm.min.js" ;
+    const socket = io()
+
+    const form = document.getElementById("formulario")
+    const mensaje = document.getElementById("ingreso")
+    const boxmsg = document.getElementById("boxchat")
+    socket.emit('conectar', 
+            {
+                emisor : nombre,
+                id : idusu
+            })
+    socket.on('actualizarListaRoom', (lista) => {
+        console.log(lista)
+    })
+    socket.on('chat', (mensaje) => {
+
+        boxmsg.insertAdjacentHTML("beforeend", `<li id="${mensaje.fecha}">${mensaje.emisor}: ${mensaje.texto}</li>`, "restricted")
+        document.getElementById(mensaje.fecha).textContent = mensaje.emisor+": "+mensaje.texto
+        boxmsg.scrollTop = boxmsg.scrollHeight
+        // console.log(mensaje)
+    })
+    form.addEventListener('submit', (e) => 
+    {
+        e.preventDefault();
+        if (mensaje.value)
+        {
+            socket.emit('chat', 
+            {
+                mensaje : mensaje.value,
+                emisor : nombre
+            })
+            mensaje.value = ''
+        }
+    })
+</script>
+<link rel="stylesheet" href="./css/estilos.css">
+<link rel="stylesheet" href="./css/mensajes.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+<html>
+        <h1><br> Hola <%- empresa %>! </h1>
+        <ul id="boxchat">
+        </ul>
+        <form id="formulario">
+            <input type="text" class="text_input" id="ingreso" name="mensaje" autocomplete="off" placeholder="Mensaje...">
+            <input type="submit">
+        </form>
+        <style>
+
+            #formulario
+            {
+                bottom: 0;
+                display: flex;
+                height: 40px;
+                left: 0;
+                position: relative;
+            }
+            #ingreso 
+            {
+                border-radius: 99px;
+                border: 1px solid #eee;
+                flex: 1;
+                margin: 4px;
+                padding: 0 8px;
+            }
+        </style>
+</html>

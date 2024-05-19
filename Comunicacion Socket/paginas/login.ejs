@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--=============== REMIXICONS ===============-->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> -->
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="./css/ignoreflechas.css">
+
+        <title>Login</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="login__content">
+                <img src="./img/bg-login.png" alt="login image" class="login__img">
+
+                <form action="http://localhost:3000/login" method="post" class="login__form">
+                    <div>
+                        <h1 class="login__title">
+                            <span>Bienvenido</span> otra vez!
+                        </h1>
+                        <p class="login__description">
+                            Antes de iniciar, debes volver a colocar tus credenciales.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <div class="login__inputs">
+                            <div>
+                                <label for="input-email" class="login__label">Usuario</label>
+                                <input type="number" inputmode="numeric" min="1" placeholder="Numero de usuario" required class="login__input" id="input-email" name="user">
+                            </div>
+    
+                            <div>
+                                <label for="input-pass" class="login__label">Contraseña</label>
+    
+                                <div class="login__box">
+                                    <input type="password" placeholder="Ingresa tu contraseña" required class="login__input" id="input-pass" name="pass">
+                                    <i class="ri-eye-off-line login__eye" id="input-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="login__check">
+                            <input type="checkbox" class="login__check-input" id="input-check">
+                            <label for="input-check" class="login__check-label">Remember me</label>
+                        </div> -->
+                    </div>
+
+                    <div class="prueb">
+                        <div class="login__buttons">
+                            <button class="login__button">Iniciar</button>
+                            <button class="login__button login__button-ghost">No tengo cuenta</button>
+                        </div>
+                        <a href="#" class="login__forgot">Olvidaste tu contraseña?</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!--=============== MAIN JS ===============-->
+         <script src="  js/main.js"></script> 
+    </body>
+</html>

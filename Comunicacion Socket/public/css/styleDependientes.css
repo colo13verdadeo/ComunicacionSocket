@@ -1,0 +1,112 @@
+ 
+ :root {
+    --blanco: #E0E0E0;
+    --azul-opacidad: #184463;
+    --bg-menu: #003053;
+    --bg-body: #C7E1FF;
+
+    --color1: #06D6A0;
+    --color2: #F08A4B;
+    --color3: #F2A541;
+    --color4: #184463;
+    --color5: #90A9B7;
+}
+
+.containerDependientes{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ 
+ /* Estilo del contenedor */
+ .containerBtnDependientes {
+    width: 70%; /* Puedes ajustar el ancho según tus necesidades */
+    max-height: 75%; /* Altura máxima antes de que aparezca el scroll */
+    overflow-y: auto; /* Agrega scroll vertical si es necesario */
+
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilo de los botones */
+.dependientesBtn {
+    padding: 10px;
+    background-color: #184463;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dependientesBtn:hover {
+    background-color: #003053;
+
+} 
+
+
+
+
+
+.none{
+    display: none!important;
+}
+
+
+#overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4); /* Fondo semitransparente */
+    z-index: 1000; /* Z-index alto para superponerse a otros elementos */
+  }
+
+  #form-container, #form-container2 {
+    background: var(--azul-opacidad); /* Color de fondo del formulario */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+  }
+
+  /* Estilos adicionales para el formulario (ajusta según tus necesidades) */
+  #form-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  #form-container input, #form-container2 input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+
+  #form-container button, #form-container2 button  {
+    background: var(--bg-body);
+    color: var(--azul-opacidad);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
