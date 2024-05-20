@@ -1,0 +1,19 @@
+<body>
+    <script src="./scripts/sweetalert2@11.js"></script>
+    <% if(typeof alert !="undefined" ) {%>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: <%= showConfirmButton%>,
+                timer: <%=time %>
+        }).then(() => {
+                    window.location = '/<%=ruta %>';
+
+                    console.log('ruta:', '/<%= ruta %>');
+                })
+        </script>
+        <% }%>
+            <script src="./scripts/sweetalert2@11.js"></script>
+</body>
