@@ -32,14 +32,16 @@ io.on("connection", (socket) => {
             ))
     })
     socket.on("conectar", (usuario) => {
+        console.log('Contando al usuario:', usuario)
         socket.join(usuario.id)
         usuarios.removeUser(socket.id)
-        usuarios.addUser(socket.id, usuario.emisor, usuario.id)
+        usuarios.addUser(socket.id, usuario.emisor, -1)
 
+        console.log('[+]', usuario.id)
         io.to(usuario.id).emit('actualizarListaRoom', usuarios.getUserList(usuario.id))
         socket.broadcast.emit('chat', mensaje(
             'Sistema',
-            'El usuario '+usuario.emisor+' se ha conectado a la sala: '+usuario.id,
+            'El usuario '+usuario.emisor+' se ha conectado',
             'tousu2'
         ))
         socket.emit('chat', mensaje(
@@ -48,6 +50,27 @@ io.on("connection", (socket) => {
             'tousu2'
         ))
     })
+    socket.on("unirme", async (mensajeRecibido) => 
+        {
+            let user = await usuarios.getUserId(socket.id)
+            if (user)
+                {
+                    //Añadir que se busque el usuario sin necesidad de traer el nombre desde el post
+                    usuarios.removeUser(socket.id)
+                    usuarios.addUser(socket.id, mensajeRecibido.emisor, mensajeRecibido.sala)
+                    //Añadir un return para saber si fue exitoso o no
+
+                    socket.join(mensajeRecibido.sala)
+                    socket.emit('chat', mensaje(
+                        'Sistema chat join:',
+                        'El usuario: '+mensajeRecibido.emisor+' ha entrado a la sala: '+mensajeRecibido.sala,
+                        'tousu2'
+                    ))
+                    io.to(mensajeRecibido.sala).emit('actualizarListaRoom', usuarios.getUserList(mensajeRecibido.sala))
+                }
+            else console.log('Hacker o error detectado')
+        })
+
     socket.on("chat", (mensajeRecibido) => {
         socket.emit('chat', mensaje(
             mensajeRecibido.emisor,

@@ -27,7 +27,15 @@
         e.preventDefault();
         if (mensaje.value)
         {
-            socket.emit('chat', 
+            if (mensaje.value.includes("sala to"))
+            {
+                mensaje.value = mensaje.value.replace("sala to", "")
+                socket.emit('unirme',{
+                    sala    : mensaje.value,
+                    emisor  : nombre
+                })
+            }
+            else socket.emit('chat', 
             {
                 mensaje : mensaje.value,
                 emisor : nombre
