@@ -22,18 +22,22 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         console.log("Usuario OFF")
-        let caca = usuarios.removeUser(socket.id)
-        console.log(caca)
-        if (caca)
-            socket.broadcast.emit('chat', mensaje(
-            'Sistema',
-            'El usuario '+caca.nombre+' se ha conectado a la sala: '+caca.sala,
-            'tousu2'
-            ))
+        let data
+        let caca
+        data   = usuarios.getUserData(socket.id)
+        caca   = usuarios.removeUser(socket.id)
+
+        if (caca && data)
+            if (data.sala != -1)
+                socket.broadcast.emit('chat', mensaje(
+                'Sistema',
+                'El usuario '+data.nombre+' se ha desconectado de la sala: '+data.sala,
+                'tousu2'
+                ))
     })
     socket.on("conectar", (usuario) => {
         console.log('Contando al usuario:', usuario)
-        socket.join(usuario.id)
+        // socket.join(usuario.id)
         usuarios.removeUser(socket.id)
         usuarios.addUser(socket.id, usuario.emisor, -1)
 
@@ -60,9 +64,16 @@ io.on("connection", (socket) => {
                     usuarios.addUser(socket.id, mensajeRecibido.emisor, mensajeRecibido.sala)
                     //Añadir un return para saber si fue exitoso o no
 
+                    console.log(socket.rooms)
+                    io.to(mensajeRecibido.sala).emit('chat', mensaje(
+                        'Sistema',
+                        'El usuario: '+mensajeRecibido.emisor+'se ha conectado a la sala tuya',
+                        'tousu2'
+                    ))
                     socket.join(mensajeRecibido.sala)
-                    socket.emit('chat', mensaje(
-                        'Sistema chat join:',
+                    console.log(socket.rooms)
+                    socket.broadcast.emit('chat', mensaje(
+                        'Sistema chat join',
                         'El usuario: '+mensajeRecibido.emisor+' ha entrado a la sala: '+mensajeRecibido.sala,
                         'tousu2'
                     ))
@@ -77,11 +88,16 @@ io.on("connection", (socket) => {
             mensajeRecibido.mensaje,
             'tousu2'
         ))
-        socket.broadcast.emit('chat', mensaje(
+
+        sala = usuarios.getUserSala(socket.id)
+        if (sala != -1)
+            {
+                socket.broadcast.to(sala).emit('chat', mensaje(
             mensajeRecibido.emisor,
             mensajeRecibido.mensaje+"kkk",
-            'tousu2'
-        ))
+            'tousu2'                    
+                ))
+            }
         console.log(mensajeRecibido)
     })
 })
