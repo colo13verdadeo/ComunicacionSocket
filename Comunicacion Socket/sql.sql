@@ -18,5 +18,5 @@ CREATE TABLE IF NOT EXISTS `messages`
     author VARCHAR(255) NOT NULL,
     content VARCHAR(500) NOT NULL,
     created_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP),
-    FOREIGN KEY author REFERENCES users(username)
+    FOREIGN KEY (author) REFERENCES users(username)
 );
