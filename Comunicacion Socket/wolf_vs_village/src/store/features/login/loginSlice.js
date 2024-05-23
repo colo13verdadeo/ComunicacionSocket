@@ -1,12 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-function userValid(user){
-  return true;
-}
-
-function passwordValid(password){
-  return true;
-}
+import { validData } from './dataValid';
 
 export const loginSlice = createSlice({
   name: 'login',
@@ -27,7 +20,7 @@ export const loginSlice = createSlice({
       state.password = action.payload
     },
     postLogin: (state) => {
-      if(userValid(state.user) && passwordValid(state.password)){
+      if(validData(state.user, state.password)){
         // TODO: usar axios para enviar los datos a backend
       } else {
         // TODO: problem_manager.status = "ERROR"
