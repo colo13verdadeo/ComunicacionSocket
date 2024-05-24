@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { validData } from './dataValid'
+import { Basic_Problem_Manager, problem_manager, validData } from './dataValid'
 
 export const registerSlice = createSlice({
   name: 'register',
@@ -7,32 +7,30 @@ export const registerSlice = createSlice({
     user: "",
     email: "",
     password: "",
-    problem_manager: {
-      status: "INIT",
-      type_error: "",
-      error: ""
-    }
+    problem_manager: Basic_Problem_Manager
   },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload
+      state.user = action.payload;
+      state.problem_manager = Basic_Problem_Manager;
     },
     setEmail: (state, action) => {
-        state.email = action.payload
-      },
-    setPassword: (state, action) => {
-      state.password = action.payload
+      state.email = action.payload;
+      state.problem_manager = Basic_Problem_Manager;
     },
-    postRegister: (state) => {
-      if(validData(state.user, state.password, state.email)){
-        // TODO: usar axios para enviar los datos a backend
-      } else {
-        // TODO: problem_manager.status = "ERROR"
-      }
+    setPassword: (state, action) => {
+      state.password = action.payload;
+      state.problem_manager = Basic_Problem_Manager;
+    },
+    setPM: (state) => {
+      state.problem_manager = problem_manager(state);
+    },
+    postStatus: (state, action) => {
+      state.problem_manager = {status: action.payload,  type_error: "connection"};
     }
   }
 })
 
-export const { setUser, setEmail, setPassword, postRegister } = registerSlice.actions;
+export const { setUser, setEmail, setPassword, setPM, postStatus } = registerSlice.actions;
 
 export default registerSlice.reducer;

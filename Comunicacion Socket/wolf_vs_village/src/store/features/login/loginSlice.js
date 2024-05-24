@@ -1,34 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { validData } from './dataValid';
+import { problem_manager, Basic_Problem_Manager } from './dataValid';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const loginSlice = createSlice({
   name: 'login',
   initialState: {
     user: "",
     password: "",
-    problem_manager: {
-      status: "INIT",
-      type_error: "",
-      error: ""
-    }
+    problem_manager: Basic_Problem_Manager
   },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload
+      state.user = action.payload;
+      state.problem_manager = Basic_Problem_Manager;
     },
     setPassword: (state, action) => {
-      state.password = action.payload
+      state.password = action.payload;
+      state.problem_manager = Basic_Problem_Manager;
     },
-    postLogin: (state) => {
-      if(validData(state.user, state.password)){
-        // TODO: usar axios para enviar los datos a backend
-      } else {
-        // TODO: problem_manager.status = "ERROR"
-      }
+    setPM: (state) => {
+      state.problem_manager = problem_manager(state);
+    },
+    postStatus: (state, action) => {
+      state.problem_manager = {status: action.payload,  type_error: "connection"};
     }
   }
 })
 
-export const { setUser, setPassword, postLogin } = loginSlice.actions;
+export const { setUser, setPassword, setPM, postStatus } = loginSlice.actions;
 
 export default loginSlice.reducer;

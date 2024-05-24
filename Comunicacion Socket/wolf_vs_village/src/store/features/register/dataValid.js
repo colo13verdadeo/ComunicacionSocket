@@ -1,3 +1,8 @@
+export const Basic_Problem_Manager = {
+  status: "OK",
+  type_error: ""
+};
+
 function userValid(user){
     const userHaveSpace = /\s/.test(user);
   
@@ -17,12 +22,13 @@ function passwordValid(password){
           password;
 }
 
-function verifyEmail(email){
+function emailValid(email){
     return email && email.includes('@');
   }
 
-export function validData(user, password, email) {
-    return userValid(user) && 
-        passwordValid(password) && 
-        verifyEmail(email);
+  export function problem_manager(state) {
+    if (!userValid(state.user)) return {status: "ERROR",  type_error: "user"};
+    else if (!passwordValid(state.password)) return {status: "ERROR",  type_error: "password"};
+    else if (!emailValid(state.email)) return {status: "ERROR",  type_error: "email"};
+    else return Basic_Problem_Manager;
 }
