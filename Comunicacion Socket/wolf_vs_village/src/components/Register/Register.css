@@ -1,0 +1,45 @@
+.wRegister{
+    border-radius: 0vw 20vw 20vw 0vw;
+}
+
+.blockForm1 {
+    background-color: white;
+    margin: auto;
+    margin-top: 25vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 60vw;
+    height: 50vh;
+    overflow: hidden;
+    /*place-content: center;*/
+}
+
+.Register .form{
+    padding: 0px 5vw 0px 5vw;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    place-items: center;
+}
+
+.Register .form input{
+    background-color: #F4F4F4;
+    border: 0px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 40px;
+}
+
+.Register .form button{
+    background-color: #415FFF;
+    border: 0px;
+    width: 100px;
+    height: 25px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.Register .form button:hover, .Welcome button:hover {
+    background-color: #439600;
+}
