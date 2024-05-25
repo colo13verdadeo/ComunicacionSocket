@@ -12,4 +12,5 @@
 
 .LogIn .form .DataError, .Register .form .DataError{
     background-color: #fdc4c4;
+    border: 1px solid #ff2828;
 }
