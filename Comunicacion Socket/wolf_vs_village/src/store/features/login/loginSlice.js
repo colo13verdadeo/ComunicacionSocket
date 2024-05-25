@@ -1,13 +1,15 @@
 import { problem_manager, Basic_Problem_Manager } from './dataValid';
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  user: "",
+  password: "",
+  problem_manager: Basic_Problem_Manager
+};
+
 export const loginSlice = createSlice({
   name: 'login',
-  initialState: {
-    user: "",
-    password: "",
-    problem_manager: Basic_Problem_Manager
-  },
+  initialState: initialState,
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
@@ -22,10 +24,13 @@ export const loginSlice = createSlice({
     },
     postStatus: (state, action) => {
       state.problem_manager = {status: action.payload,  type_error: "connection"};
+    },
+    resetStateLogin: (state) => {
+      return initialState;
     }
   }
 })
 
-export const { setUser, setPassword, setPM, postStatus } = loginSlice.actions;
+export const { setUser, setPassword, setPM, postStatus, resetStateLogin } = loginSlice.actions;
 
 export default loginSlice.reducer;

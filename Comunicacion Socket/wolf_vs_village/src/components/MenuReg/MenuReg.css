@@ -1,11 +1,15 @@
 .blockForm1 {
     background-color: white;
     margin: auto;
-    margin-top: 25vh;
+    margin-top: 20vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 60vw;
     height: 60vh;
     overflow: hidden;
     /*place-content: center;*/
+}
+
+.LogIn .form .DataError, .Register .form .DataError{
+    background-color: #fdc4c4;
 }

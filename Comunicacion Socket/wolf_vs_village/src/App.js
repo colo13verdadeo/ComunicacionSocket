@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <BrowserRouter store={store}>
         <Routes>
-          <Route path="/Menu_log" element={<MenuReg AccCompo="login"/>} />
+          <Route path="/login-register" element={<MenuReg AccCompo="Login"/>} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Basic_Problem_Manager, problem_manager, validData } from './dataValid'
+import { Basic_Problem_Manager, problem_manager } from './dataValid'
+
+const initialState = {
+  user: "",
+  email: "",
+  password: "",
+  problem_manager: Basic_Problem_Manager
+};
 
 export const registerSlice = createSlice({
   name: 'register',
-  initialState: {
-    user: "",
-    email: "",
-    password: "",
-    problem_manager: Basic_Problem_Manager
-  },
+  initialState: initialState,
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
@@ -27,10 +29,13 @@ export const registerSlice = createSlice({
     },
     postStatus: (state, action) => {
       state.problem_manager = {status: action.payload,  type_error: "connection"};
+    },
+    resetStateRegister: (state) => {
+      return initialState;
     }
   }
 })
 
-export const { setUser, setEmail, setPassword, setPM, postStatus } = registerSlice.actions;
+export const { setUser, setEmail, setPassword, setPM, postStatus, resetStateRegister } = registerSlice.actions;
 
 export default registerSlice.reducer;
