@@ -1,0 +1,11 @@
+.blockForm1 {
+    background-color: white;
+    margin: auto;
+    margin-top: 25vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 60vw;
+    height: 60vh;
+    overflow: hidden;
+    /*place-content: center;*/
+}

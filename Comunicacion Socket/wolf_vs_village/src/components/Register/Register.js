@@ -1,37 +1,36 @@
+import { postStatus, setEmail, setPM, setPassword, setUser } from "../../store/features/register/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { postStatus, setPM, setPassword, setUser } from "../../store/features/register/registerSlice";
 import { RegisterService } from "../../config/register";
+import Welcome from "../Welcome/Welcome";
+import { useEffect } from "react";
 import "./Register.css";
 
 function Register({setCompo}) {
     const {user, email, password, problem_manager} = useSelector(state => state.register);
     const dispatch = useDispatch();
-    const postRegister = () => {
-        dispatch(setPM());
-        
-        if(problem_manager.status === "OK")
+    useEffect(() => {
+        console.log(problem_manager)
+        if(problem_manager.status === "CONNECTION")
             RegisterService({user: user, password: password, email: email}, (e) => dispatch(postStatus(e)));
-    }
-
+    }); //TODO: debería tener [problem_manager] pero en la terminal aparece un warning que pide 
+        //[user, email, password, problem_manager, dispatch], y que esté dispatch ahí no me parece bueno (loop infinito).
+        //En sí, el useEffect debería funcionar sólo sí problem_manager se modifica, pero funciona para 
+        //cualquier caso.
     return <div className="blockForm1">
-        <div className="Welcome wRegister">
-            <h1 className="TitleWelcome">WELCOME!</h1>
-            <p className="TextWelcome">You have an account?</p>
-            <button className="ButtonSignUP" onClick={() => setCompo("login")}>SIGN IN</button>
-        </div>
+        <Welcome setCompo={setCompo} modCompo="Login"/>
         {
-            (problem_manager.status === 'END')?
-            <div>
-                <p>REGISTRADO</p>
+            (problem_manager.status === 'END')? //TODO: Falta diseñar
+            <div> 
+                <p>REGISTRADO</p> 
             </div>
             :
             <div className="Register">
                 <h1>Sign Up</h1>
                 <div className="form">
                     <input type="text" placeholder="user" onChange={e => dispatch(setUser(e.target.value))}/>
-                    <input type="mail" placeholder="mail" onChange={e => dispatch(setUser(e.target.value))}/>
+                    <input type="mail" placeholder="mail" onChange={e => dispatch(setEmail(e.target.value))}/>
                     <input type="password" placeholder="password" onChange={e => dispatch(setPassword(e.target.value))}/>
-                    <button onClick={_ => postRegister()}>DONE</button>
+                    <button onClick={_ => dispatch(setPM())}>DONE</button>
                 </div>
             </div>
         }
